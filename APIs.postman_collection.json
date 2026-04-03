@@ -1,0 +1,1715 @@
+{
+  "info": {
+    "_postman_id": "f7979376-9ee9-4c54-a70d-4e8d5f24b2f6",
+    "name": "APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "37431833",
+    "_collection_link": "https://go.postman.co/collection/37431833-f7979376-9ee9-4c54-a70d-4e8d5f24b2f6?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\":\"Sales_Rep\",\n    \"email\":\"moamenkhaled@gmail.com\",\n    \"password\":\"MoamenKhaled1\",\n\t\t\"role\":\"Sales_Rep\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/register",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();",
+                  "pm.environment.set(\"BEARER_ACCESS_TOKEN\", response.data.token);",
+                  "console.log(\"✅ Tokens saved to environment variables: ACCESS_TOKEN\");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"moamenkhaled369@gmail.com\", //Admin\n    // \"email\":\"moamenkhaled589@gmail.com\", //Sales_Rep\n    // \"email\":\"moamenkhaled@gmail.com\", //Sales_Rep\n    // \"email\": \"moamenkhaled237@gmail.com\", //Read_Only\n    \"password\":\"MoamenKhaled1\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/login",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/me",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/logout",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"oldPassword\":\"MoamenKhaled1\",\n    \"password\":\"MoamenKhaled1\",\n    \"confirmPassword\":\"MoamenKhaled1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/me/password",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me",
+                "password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "item": [
+        {
+          "name": "create contact",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\":\"contact\",\n    \"lastName\":\"two\",\n    \"email\":\"contact305@gmail.com\",\n    \"phone\":\"01033703690\",\n    \"countryCode\":\"EG\",\n    \"status\":\"Lead\"\n    // \"source\":\"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/contacts",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "contacts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "contact list",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/contacts?page=1&limit=2&status=Lead&search=contact",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "contacts"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                },
+                {
+                  "key": "status",
+                  "value": "Lead"
+                },
+                {
+                  "key": "search",
+                  "value": "contact"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get contact by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/contacts/69c95aa87cc3fe962d646d7b",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "69c95aa87cc3fe962d646d7b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update contact",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\":\"moamen\",\n    \"lastName\":\"khled\",\n    \"email\":\"contact50@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/contacts/69c95a727cc3fe962d646d71",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "69c95a727cc3fe962d646d71"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete contact",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    // \"email\":\"moamenkhaled369@gmail.com\", //Admin\n    // \"email\":\"moamenkhaled589@gmail.com\", //Sales_Rep\n    \"email\":\"moamenkhaled@gmail.com\", //Sales_Rep\n    // \"email\": \"moamenkhaled237@gmail.com\", //Read_Only\n    \"password\":\"MoamenKhaled1\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/contacts/69cc1b5f8a54e92a3c6fa8c4",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "69cc1b5f8a54e92a3c6fa8c4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "search",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/contacts/search?key=contact",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "contact"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Deal",
+      "item": [
+        {
+          "name": "Deal",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Website Redesign Project\",\n  \"contactId\": \"69cc1b5f8a54e92a3c6fa8c4\",\n  \"ownerId\": \"69c8683b2b89438c5ab7ae38\",\n  \"stage\": \"Won\",\n  \"value\": 15000,\n  \"currency\": \"USD\",\n  \"expectedCloseDate\": \"2026-05-15\",\n  \"probability\": 50,\n  \"description\": \"Redesign the corporate website for improved UX and SEO\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/deals",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "deals"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get deal by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/deals/69cb8673148faf4ba519018e",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "deals",
+                "69cb8673148faf4ba519018e"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deals list",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/deals",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "deals"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "search",
+                  "value": "r",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update deal",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"SEO Optimization Delta\",\n    \"stage\": \"New\",\n    \"value\": 9500,\n    \"currency\": \"USD\",\n    \"expectedCloseDate\": \"2026-05-18\",\n    \"probability\": 70,\n    \"description\": \"Improve search rankings for main keywords\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/deals/69cb8673148faf4ba519018e",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "deals",
+                "69cb8673148faf4ba519018e"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete deal",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/deals/69cb8673148faf4ba519018f",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "deals",
+                "69cb8673148faf4ba519018f"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "search",
+                  "value": "r",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get deals grouped by stage",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/deals/pipeline",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "deals",
+                "pipeline"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "search",
+                  "value": "r",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Activity",
+      "item": [
+        {
+          "name": "create activity",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ownerId\": \"69c8683b2b89438c5ab7ae38\",\n  \"contactId\": \"69cc1b5f8a54e92a3c6fa8c4\",\n  \"dealId\": \"69cc1b868a54e92a3c6fa8d2\",\n  \"type\": \"Meeting\",\n  \"notes\": \"Discussed project requirements and next steps.\",\n  \"scheduledAt\": \"2026-04-05T15:00:00.000Z\",\n  \"duration\": 30,\n  \"outcome\": \"No_Answer\",\n  \"outcomeNote\": \"Client agreed to proceed with proposal\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/activities",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "activities"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "search",
+                  "value": "r",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/activities",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "activities"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Meeting",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get activity by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/activities/69cc376f24b0f7859b9f5048",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "activities",
+                "69cc376f24b0f7859b9f5048"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Meeting",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get activities of contact",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    // \"email\":\"moamenkhaled369@gmail.com\", //Admin\n    \"email\":\"moamenkhaled589@gmail.com\", //Sales_Rep\n    // \"email\":\"moamenkhaled@gmail.com\", //Sales_Rep\n    // \"email\": \"moamenkhaled237@gmail.com\", //Read_Only\n    \"password\":\"MoamenKhaled1\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/contacts/69cc1b5f8a54e92a3c6fa8c4/activities",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "69cc1b5f8a54e92a3c6fa8c4",
+                "activities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get activities of deal",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/deals/69cc1b868a54e92a3c6fa8d2/activities",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "deals",
+                "69cc1b868a54e92a3c6fa8d2",
+                "activities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update activity",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"notes\":\"update\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/activities/69cc1bb28a54e92a3c6fa8dc",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "activities",
+                "69cc1bb28a54e92a3c6fa8dc"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete activity",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"notes\":\"update activity\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/activities/69cc1bb18a54e92a3c6fa8d7",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "activities",
+                "69cc1bb18a54e92a3c6fa8d7"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Task",
+      "item": [
+        {
+          "name": "create task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\":\"task 3\",\n    \"dueDate\":\"2025-06-03T09:00:00.000Z\",\n    \"contactId\":\"69cc1b5f8a54e92a3c6fa8c4\",\n    \"dealId\":\"69cd5443f6c27b252f3faeff\",\n    \"priority\":\"High\",\n    \"assignedTo\":\"69c8683b2b89438c5ab7ae38\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/tasks",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "tasks"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Meeting",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "tasks list",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\":\"task 1\",\n    \"dueDate\":\"2026-04-05T15:00:00.000Z\",\n    \"contactId\":\"69cc1975b5d1e27d00de6889\",\n    \"dealId\":\"69cc1a778a54e92a3c6fa88f\",\n    \"priority\":\"High\",\n    \"assignedTo\":\"69ca5570915bfc513ceaf726\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/tasks?isCompleted=false",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "tasks"
+              ],
+              "query": [
+                {
+                  "key": "priority",
+                  "value": "High",
+                  "disabled": true
+                },
+                {
+                  "key": "startDueDate",
+                  "value": "2026-06-01T09:00:00.000Z",
+                  "disabled": true
+                },
+                {
+                  "key": "endDueDate",
+                  "value": "2026-07-03T09:00:00.000Z",
+                  "disabled": true
+                },
+                {
+                  "key": "isCompleted",
+                  "value": "false"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "over due tasks",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\":\"task 1\",\n    \"dueDate\":\"2026-04-05T15:00:00.000Z\",\n    \"contactId\":\"69cc1975b5d1e27d00de6889\",\n    \"dealId\":\"69cc1a778a54e92a3c6fa88f\",\n    \"priority\":\"High\",\n    \"assignedTo\":\"69ca5570915bfc513ceaf726\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/tasks/overdue",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "tasks",
+                "overdue"
+              ],
+              "query": [
+                {
+                  "key": "priority",
+                  "value": "High",
+                  "disabled": true
+                },
+                {
+                  "key": "startDueDate",
+                  "value": "2026-06-01T09:00:00.000Z",
+                  "disabled": true
+                },
+                {
+                  "key": "endDueDate",
+                  "value": "2026-07-03T09:00:00.000Z",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get task by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\":\"task 1\",\n    \"dueDate\":\"2026-04-05T15:00:00.000Z\",\n    \"contactId\":\"69cc1975b5d1e27d00de6889\",\n    \"dealId\":\"69cc1a778a54e92a3c6fa88f\",\n    \"priority\":\"High\",\n    \"assignedTo\":\"69ca5570915bfc513ceaf726\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/tasks/69cec6176ef3e1a2761c06e1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "tasks",
+                "69cec6176ef3e1a2761c06e1"
+              ],
+              "query": [
+                {
+                  "key": "priority",
+                  "value": "High",
+                  "disabled": true
+                },
+                {
+                  "key": "startDueDate",
+                  "value": "2026-06-01T09:00:00.000Z",
+                  "disabled": true
+                },
+                {
+                  "key": "endDueDate",
+                  "value": "2026-07-03T09:00:00.000Z",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\":\"task 1\",\n    \"dueDate\":\"2026-04-05T15:00:00.000Z\",\n    \"contactId\":\"69cc1975b5d1e27d00de6889\",\n    \"dealId\":\"69cc1a778a54e92a3c6fa88f\",\n    \"priority\":\"High\",\n    \"assignedTo\":\"69ca5570915bfc513ceaf726\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/tasks/69cec6176ef3e1a2761c06e1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "tasks",
+                "69cec6176ef3e1a2761c06e1"
+              ],
+              "query": [
+                {
+                  "key": "priority",
+                  "value": "High",
+                  "disabled": true
+                },
+                {
+                  "key": "startDueDate",
+                  "value": "2026-06-01T09:00:00.000Z",
+                  "disabled": true
+                },
+                {
+                  "key": "endDueDate",
+                  "value": "2026-07-03T09:00:00.000Z",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update task",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\":\"task 2\",\n    \"dueDate\":\"2027-04-05T15:00:00.000Z\",\n    \"priority\":\"Low\",\n    \"markDone\":true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/tasks/69cec61a6ef3e1a2761c06e6",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "tasks",
+                "69cec61a6ef3e1a2761c06e6"
+              ],
+              "query": [
+                {
+                  "key": "priority",
+                  "value": "High",
+                  "disabled": true
+                },
+                {
+                  "key": "startDueDate",
+                  "value": "2026-06-01T09:00:00.000Z",
+                  "disabled": true
+                },
+                {
+                  "key": "endDueDate",
+                  "value": "2026-07-03T09:00:00.000Z",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Report",
+      "item": [
+        {
+          "name": "total deal values per stage",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    // \"email\":\"moamenkhaled369@gmail.com\", //Admin\n    // \"email\":\"moamenkhaled589@gmail.com\", //Sales_Rep\n    \"email\":\"moamenkhaled@gmail.com\", //Sales_Rep\n    // \"email\": \"moamenkhaled237@gmail.com\", //Read_Only\n    \"password\":\"MoamenKhaled1\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/reports/pipeline-summary?startDate=2025-06-03T09:00:00.000Z&endDate=2027-06-03T09:00:00.000Z",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "pipeline-summary"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2025-06-03T09:00:00.000Z"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-06-03T09:00:00.000Z"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "total won deal per stage",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    // \"email\":\"moamenkhaled369@gmail.com\", //Admin\n    \"email\":\"moamenkhaled589@gmail.com\", //Sales_Rep\n    // \"email\":\"moamenkhaled@gmail.com\", //Sales_Rep\n    // \"email\": \"moamenkhaled237@gmail.com\", //Read_Only\n    \"password\":\"MoamenKhaled1\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/reports/sales-by-rep?startDate=2026-04-03T13:50:57.469Z&endDate=2027-06-03T09:00:00.000Z",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "sales-by-rep"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2026-04-03T13:50:57.469Z"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-06-03T09:00:00.000Z"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get contacts growth",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    // \"email\":\"moamenkhaled369@gmail.com\", //Admin\n    \"email\":\"moamenkhaled589@gmail.com\", //Sales_Rep\n    // \"email\":\"moamenkhaled@gmail.com\", //Sales_Rep\n    // \"email\": \"moamenkhaled237@gmail.com\", //Read_Only\n    \"password\":\"MoamenKhaled1\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/reports/contacts-growth?startDate=2025-06-01T00:00:00.000Z&endDate=2027-06-03T23:59:59.999Z",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "contacts-growth"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2025-06-01T00:00:00.000Z"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-06-03T23:59:59.999Z"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "lead to customer conversion",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    // \"email\":\"moamenkhaled369@gmail.com\", //Admin\n    \"email\":\"moamenkhaled589@gmail.com\", //Sales_Rep\n    // \"email\":\"moamenkhaled@gmail.com\", //Sales_Rep\n    // \"email\": \"moamenkhaled237@gmail.com\", //Read_Only\n    \"password\":\"MoamenKhaled1\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/reports/conversion-rate?startDate=2025-06-01T00:00:00.000Z&endDate=2027-06-03T23:59:59.999Z",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "conversion-rate"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2025-06-01T00:00:00.000Z"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-06-03T23:59:59.999Z"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "count of overdue tasks by rep",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-forwarded-for",
+                "value": "{{CLIENT_IP}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    // \"email\":\"moamenkhaled369@gmail.com\", //Admin\n    // \"email\":\"moamenkhaled589@gmail.com\", //Sales_Rep\n    \"email\":\"moamenkhaled@gmail.com\", //Sales_Rep\n    // \"email\": \"moamenkhaled237@gmail.com\", //Read_Only\n    \"password\":\"MoamenKhaled1\"\n}\n"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/reports/overdue-tasks?startDate=2025-06-01T00:00:00.000Z&endDate=2027-06-03T23:59:59.999Z",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "overdue-tasks"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2025-06-01T00:00:00.000Z"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-06-03T23:59:59.999Z"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
