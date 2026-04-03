@@ -1,0 +1,5 @@
+node_modules
+SRS.odt
+config/.env.dev
+config/.env.prod
+logs
